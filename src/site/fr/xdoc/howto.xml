@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Mode d'emploi</title>
+    </properties>
+    <body>
+        <section name="Mode d'emploi" />
+        
+        <section name="Les concepts">
+            <subsection name="La page">
+                <p>
+                    Une "dbpage" se définit tout d'abord par son nom qui permet de 
+                    l'invoquer dans l'url d'affichage :
+                    <code>Portal.jsp?page=dbpage&amp;dbpage=<i>dbpage_name</i>
+                    </code>
+                </p>
+                <p>
+                    Ensuite la page elle même se décompose en sections (1 à n).
+                </p>
+            </subsection>
+            <subsection name="Les sections">
+                <p>
+                    Une section est un bloc de la page dont le contenu est produit à
+                    partir d'un template HTML et d'une requête SQL.
+                </p>
+                <p>
+                    Le sections peuvent être de plusieurs types. Les plus courants sont
+                    "form" et "table" permettant de remplir un template respectivement
+                    en mode fiche (1 enregistrement) ou en mode liste (n enregistrements).
+                </p>
+            </subsection>
+            <subsection name="Les paramètres ">
+                <p>
+                    Des paramètres peuvent être passés dans l'url de la page pour être 
+                    utilisés dans les requêtes SQL. Les paramètres sont désignés par
+                    un nom prédéfini value[1..n]. Leur nombre n'est pas limité
+                    mais leur numérotation doit être continue de 1 à n.
+                </p>
+                <p>
+                    Voici un exemple d'URL utilisant deux paramètres :<br />
+                    <code>Portal.jsp?page=dbpage&amp;dbpage=dbpage_name&amp;<strong>value1=10&amp;value2=5</strong></code>                    
+                </p>
+                <p>
+                    Voici comment ces paramètres peuvent être exploités dans les requêtes SQL :<br />
+                    <code>section3.sql=SELECT name, description FROM mytable1 WHERE id=<strong>@value1@</strong></code><br />
+                    <code>section5.sql=SELECT name, description FROM mytable2 WHERE id=<strong>@value2@</strong></code><br />
+                </p>
+            </subsection>
+        </section>
+        <section name="Modes de définition des Dbpages">
+            <p>
+                    Les dbpages peuvent être réalisées selon deux modes : le mode fichier
+                    (les attributs de la page sont définis dans un fichier texte) et le
+                    mode base de données (les attributs de la page sont définis par le
+                    biais d'une interface utilisateur dans le back office).
+            </p>
+            <subsection name="Le mode fichier">
+                <p>
+                        Les attributs de la dbpage sont définis dans une fichier texte ayant
+                        pour nom
+                    <code>
+                        "<i>mydbpage</i>.properties"
+                    </code> et devant se trouver 
+                        dans le répertoire
+                    <code>"WEB-INF/plugins/dbpage"</code>.
+                </p>
+                <p>
+                    <table>
+                        <tr>
+                            <th>Attribut de la page</th>
+                            <th>Obligatoire</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>page.paramname</td>
+                            <td>Oui</td>
+                            <td>
+                                    Nom de la dbpage qui sera utilisé dans l'url d'appel de la page :
+                                <code>Portal.jsp?page=dbpage&amp;dbpage=<i>dbpage_name</i>
+                                </code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>page.title</td>
+                            <td>Oui</td>
+                            <td>
+                                    Nom de la page qui s'affichera danz la barre de titre du navigateur
+                                    et dans le fil d'ariane.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>page.nbsections</td>
+                            <td>Oui</td>
+                            <td>
+                                    Nombre de sections de la page définies dans le fichier.
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+                <p>
+                    <table>
+                        <tr>
+                            <th>Attribut de section</th>
+                            <th>Obligatoire</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.title
+                            </td>
+                            <td>Non</td>
+                            <td>Titre de la section</td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.type
+                            </td>
+                            <td>Oui</td>
+                            <td>
+                                    Les types de section disponibles sont définis 
+                                    dans le fichier "/WEB-INF/conf/plugins/dbpage.properties".
+                                <br />
+                                    Les types de base sont "form" et "table".
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.template
+                            </td>
+                            <td>Oui</td>
+                            <td>
+                                    Chemin relatif du fichier template HTML à partir de 
+                                    "WEB-INF/plugins/dbpage/".
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.column
+                            </td>
+                            <td>Oui si requête SQL</td>
+                            <td>
+                                    Pour une section de type "table", ce champ définit 
+                                    la liste des titres des colonnes du tableau formé 
+                                    par les résultats de la requête SQL .<br />
+                                    Pour une section de type "form", ce champ définit
+                                    la liste des signets du template de fiche à remplir
+                                    par ordre des colonnes du résultat de la requête SQL.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.sql
+                            </td>
+                            <td>Oui pour "table"</td>
+                            <td>
+                                    Requête SQL destinée à remplir le tableau.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.pool
+                            </td>
+                            <td>Non</td>
+                            <td>
+                                    Pool de connexion spécifique. Par défaut, le pool
+                                    utilisé est celui associé au plugin.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>section
+                                <i>N</i>.role
+                            </td>
+                            <td>Non</td>
+                            <td>
+                                   L'affichage de la section ne se fait que si l'utilisateur 
+                                   est authentifié est dispose du role défini par cette variable.
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+                <p>
+                        Voici un exemple de fichier :
+                </p>
+                <code>
+                    <pre>
+page.paramname=mydbpage
+page.title=My DbPage Title
+page.nbsections=2
+
+# section #1
+section1.title=header
+section1.type=form
+section1.template=mydbpage/hearder.html
+
+# section #2
+section2.title=Liste des utilisateurs du back office
+section2.type=table
+section2.template=mydbpage/table.html
+section2.column=Prénom , Nom
+section2.sql=SELECT first_name , last_name FROM core_admin_user ORDER BY last_name;
+                    </pre>
+                </code>
+            </subsection>
+            <subsection name="Le mode base de données">
+                <p>
+                    Ce mode permet de saisir les attributs des dbpages dans le Back Office
+                    de Lutece par le biais d'une interface utilisateur.
+                    Cette fonction s'intitule "Gestion des DbPages".<br />
+                    Les attributs sont les mêmes que le mode fichier et sont 
+                    stockés en base de données, à l'exception
+                    des templates qui doivent être stockés de la même façon que 
+                    pour le mode fichier.
+                </p>
+                
+                    
+            </subsection>
+        </section>
+    </body>
+</document>

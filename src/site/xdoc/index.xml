@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Introduction</title>
+    </properties>
+    <body>
+        <section name="Overview of plugin dbpage">
+            <subsection name="Introduction">
+                <p>
+                The dbpage plugin allows to create online reports by extracting data from any database and presenting it 
+                with the help of simple HTML templates.
+                </p> 
+            </subsection>
+            <subsection name="Prerequisites">
+                <p>
+                In order to follow this tutorial, a knowledge of SQL and HTML is needed.
+                </p> 
+            </subsection>
+        </section>
+        <section name="Overview of plugin dbpage">
+            <subsection name="Choose your datasource(s)">
+                <p>
+                The datasource is declared as a pool in the <code>db.properties</code>.The datasource may be any database accessible by JDBC
+                (i.e MySQL,PostgreSQL,Oracle,Microsoft SQL Server etc ...). The code snippet below shows how a pool may be declared 
+                </p>
+
+                <p>
+                <pre>
+#mypool.poolservice is not a mandatory property
+mypool.poolservice=fr.paris.lutece.util.pool.service.LuteceConnectionService
+mypool.driver=org.gjt.mm.mysql.Driver
+mypool.url=jdbc:mysql://localhost/mydatabase?autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=utf8
+mypool.user=
+mypool.password=
+mypool.initconns=2
+mypool.maxconns=5
+mypool.logintimeout=2000
+mypool.checkvalidconnectionsql=SELECT 1
+                </pre>              
+                </p> 
+                  <p>
+                  Each section can be branched to a different or same pool as shown on the diagram below. The DbPage is composed of all the sections as
+                  follows. This allows data synthesis by combination of many sections.
+                <center>
+                	<img
+						src="images/dbpage_manual_002.gif"
+						alt="Image" />
+                </center>
+      
+                </p> 
+            </subsection>
+
+              <subsection name="Choose parameters to target the appropriate data">
+                <p>
+                The variables of a report may be a date, a project or any data. The choice of these parameters as variables in order to allow the
+                user to scroll through the report depends on your user requirements.
+                Please consult the usage section to see a simple usage
+                of dbpage in a concrete example
+                (e.g MyHelloWorld Report).
+                </p> 
+            </subsection>
+            
+            <subsection name="Create the templates or use provided templates for rendering">
+                <p>
+                Each DbPage has a title and sections. The sections are of type form,table and selects. The choice of a template depends on the
+                dataset that is collected by the sql query. Any esthetic concerns will be expressed into the template(colors,styles,size). The DbPage can be declared 
+                directly in the Back Office or as text files that are uploaded on the server.This issue is treated in more details in the Usage section.
+                </p>
+                <p>
+                <center>
+                	<img
+						src="images/dbpage_manual_001.gif"
+						alt="Image" />
+                </center>
+      
+                </p> 
+                
+            </subsection>
+            
+        </section>
+        <section name="Publish in a few clicks">
+          <p>
+          The dbpage can be published as a portlet so that it can marry completely the general design of the Lutece CMS or as an XPage which will
+          be accessed by a specific Url. In general a combination of the two can be used in order to handle form submission to enhance interaction
+          while navigation through the data.  
+          
+          </p>
+        </section>
+    </body>
+</document>

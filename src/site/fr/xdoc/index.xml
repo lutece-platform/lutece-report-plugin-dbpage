@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Introduction</title>
+    </properties>
+    <body>
+        <section name="Descriptif du plugin dbpage">
+            <subsection name="Introduction">
+                <p>
+                    Le plugin dbpage permet de mettre en forme et publier des 
+                    contenus provenant de base de données sans programmation Java.
+                    La page est contruite à partir de gabarits HTML (templates) et de requêtes SQL.
+                </p> 
+                <p>
+                    Le mode de fonctionnement des dbpages et leur réalisation sont
+                    décrits dans le <a href="howto.html">mode d'emploi</a>.
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>

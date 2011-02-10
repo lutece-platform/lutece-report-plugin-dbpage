@@ -1,0 +1,12 @@
+<div class="content-box">
+    <form method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/CreateSection.jsp">
+        <h2>#i18n{dbpage.create_section_type.tableLabel}</h2>
+        <input type="hidden" name="dbpage_id" value="${dbpage_id}" />
+        <p>
+            <label for="type_id" >#i18n{dbpage.create_section_type.rowTitleType}  :</label>
+            <@combo name="type_id" default_value="" items=section_type_id_list />
+        </p>
+            <input type="submit" value="#i18n{dbpage.create_section_type.buttonCreate}" class="button" tabindex="3" />
+        </p>
+    </form>
+</div>
