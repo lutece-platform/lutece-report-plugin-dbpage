@@ -2,7 +2,7 @@
     <!-- Plugin Information --> 
     <name>dbpage</name>
     <class>fr.paris.lutece.plugins.dbpage.service.DbPagePlugin</class>
-    <version>2.1.4</version>
+    <version>2.1.5</version>
     <description>dbpage.plugin.description</description>
     <documentation/>
     <installation/>
