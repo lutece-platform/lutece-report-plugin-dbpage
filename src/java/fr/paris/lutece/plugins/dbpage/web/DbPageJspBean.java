@@ -59,15 +59,11 @@ import fr.paris.lutece.util.html.HtmlTemplate;
 import fr.paris.lutece.util.html.Paginator;
 import fr.paris.lutece.util.url.UrlItem;
 
-import org.apache.commons.fileupload.FileItem;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.sql.SQLException;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +71,9 @@ import java.util.Map;
 import java.util.Stack;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -421,22 +420,29 @@ public class DbPageJspBean extends PluginAdminPageJspBean
         int nIdOrder = DbPageDatabaseSectionHome.getMaxIdByOrder( nPageId, getPlugin(  ) );
         section.setOrder( nIdOrder + 1 );
 
-        FileItem fileItem = multipartRequest.getFile( PARAMETER_SECTION_TEMPLATE );
-
-        try
+        if ( !bDefaultTemplate )
         {
-            if ( fileItem != null )
-            {
-                localTemplateFile( section, fileItem, strPageDesc, bDefaultTemplate, true );
-            }
-            else
-            {
-                section.setTemplatePath( "" );
-            }
+        	FileItem fileItem = multipartRequest.getFile( PARAMETER_SECTION_TEMPLATE );
+        	
+        	try
+        	{
+        		if ( fileItem != null )
+        		{
+        			localTemplateFile( section, fileItem, strPageDesc, bDefaultTemplate, true );
+        		}
+        		else
+        		{
+        			section.setTemplatePath( StringUtils.EMPTY );
+        		}
+        	}
+        	catch ( IOException e )
+        	{
+        		AppLogService.error( e );
+        	}
         }
-        catch ( IOException e )
+        else
         {
-            AppLogService.error( e );
+        	section.setTemplatePath( StringUtils.EMPTY );
         }
 
         DbPageDatabaseSectionHome.create( section, getPlugin(  ) );
@@ -824,7 +830,7 @@ public class DbPageJspBean extends PluginAdminPageJspBean
         String strFileName = fileItem.getName(  );
         File file = new File( strFileName );
 
-        if ( !file.getName(  ).equals( "" ) && !strDbPageName.equals( null ) )
+        if ( StringUtils.isNotBlank( file.getName(  ) ) && !strDbPageName.equals( null ) )
         {
             String strNameFile = file.getName(  );
 
