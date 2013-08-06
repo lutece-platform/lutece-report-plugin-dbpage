@@ -1,10 +1,10 @@
-    <form method="post" action="jsp/site/Portal.jsp?page=dbpage&dbpage=test4">
-        <select id="value1" name="value1">
-             <#if list_select?exists>
-             <#list list_select as row>
-                <option value=" ${row[0]?string}"> ${row[1]}</option>
-             </#list> 
-             </#if>
-        </select>
-    <input class="-lutece-input -lutece-border-radius-mini" value="Submit" type="submit">
-    </form>
+	<form class="form-horizontal" method="post" action="jsp/site/Portal.jsp?page=dbpage&dbpage=test4">
+	<fieldset>
+		<select id="value1" name="value1">
+		<#if list_select?exists>
+			<#list list_select as row>
+				<option value=" ${row[0]?string}"> ${row[1]}</option>
+			</#list> 
+		</#if>
+		</select>
+		<button class="btn btn-primary btn-small" type="submit" >Submit</button>

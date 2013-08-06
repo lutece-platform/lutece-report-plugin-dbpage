@@ -1,49 +1,82 @@
-<div class="content-box">
-    <form method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/DoModifySection.jsp">
-        <h2>#i18n{dbpage.modify_section.tableLabel}</h2>
-        <p>
-            <label for="section_title" >#i18n{dbpage.modify_section.rowTitleTitle} * :</label>
-            <input type="text" id="section_title" name="section_title" size="60" maxlength="50" tabindex="1" value="${section.title}"/>
-            <input type="hidden" name="dbpage_id" value="${dbpage_id}" />
-            <input type="hidden" name="section_id" value="${section_id}" />
-        </p>  
-        <p>
-            <label for="template_default" >#i18n{dbpage.modify_section.rowTitleTemplateDefault}</label>
-            <input name="template_default" id="template_default" tabindex="5" type="checkbox" class="checkbox" <#if section.templatePath == "">checked</#if>  />                                                                                         </p>   
-        <p>
-                <p>
-            <label for="section_sql_check" >#i18n{dbpage.modify_section.rowTitleSqlCheck}</label>
-            <input name="section_sql_check" id="section_sql_check" tabindex="5" class="checkbox" type="checkbox" checked>   
-        </p> 
-        <p>
-            <label for="section_template" >#i18n{dbpage.modify_section.rowTitleTemplate}  :</label>
-            <input type="file" name="section_template" size="60" maxlength="100" /> 
-            <input id="section_template_update" name="section_template_update"  type="checkbox"> #i18n{dbpage.modify_section.labelUpdateTemplate}
-            
-        </p>
-
-        <p>
-            <label for="type_id" >#i18n{dbpage.modify_section.rowTitleType}  :</label>
-            <@combo name="type_id" default_value="${section.idType}" items=type_list />
-        </p>
-        <p>
-            <label for="section_desc_column" >#i18n{dbpage.modify_section.rowTitleColumn}  :</label>
-            <input type="text" id="section_desc_column" name="section_desc_column" size="60" maxlength="255" tabindex="1" value="${section.column}"/>
-            
-        </p>
-        <p><label for="section_desc_sql" >#i18n{dbpage.modify_section.rowTitleSql}  :</label>
-            <textarea rows="3" cols="100" name="section_desc_sql" >${section.sql}</textarea>
-        </p>
-        <p>
-            <label for="section_pool" >#i18n{dbpage.modify_section.rowTitlePool}  :</label>
-            <@combo name="section_pool" default_value="${section.pool}" items=pool_list />
-        </p>
-        <p>
-            <label for="role" >#i18n{dbpage.create_section.rowTitleRole}  :</label>
-            <@combo name="role" default_value="${section.role}" items=role_list />
-        </p>
-        <p>   
-            <input type="submit" value="#i18n{dbpage.modify_section.buttonModify}" class="button" tabindex="3" />
-        </p>
-    </form>
+<div class="row-fluid">
+	<div class="span12">
+		<form class="form-horizontal" method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/DoModifySection.jsp">
+		<input type="hidden" name="dbpage_id" value="${dbpage_id}" >
+		<input type="hidden" name="section_id" value="${section_id}">
+		<fieldset>
+			<legend>#i18n{dbpage.modify_section.tableLabel}</legend>
+			<div class="control-group">
+				<label class="control-label" for="section_title" >#i18n{dbpage.modify_section.rowTitleTitle} * :</label>
+				<div class="controls">
+					<input type="text" id="section_title" name="section_title" class="input-large" maxlength="50" tabindex="1" value="${section.title}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="" ></label>
+				<div class="controls">
+					<label class="checkbox" for="template_default" >
+					<input name="template_default" id="template_default" tabindex="5" type="checkbox" class="checkbox" <#if section.templatePath == "">checked</#if>>
+					 #i18n{dbpage.modify_section.rowTitleTemplateDefault}
+					</label>
+				</div>
+			</div>                                                                                            
+			<div class="control-group">
+				<label class="control-label" for="" ></label>
+				<div class="controls">
+					<label class="checkbox" for="section_sql_check" >
+						<input name="section_sql_check" id="section_sql_check" tabindex="5" class="checkbox" type="checkbox" checked> 
+						#i18n{dbpage.modify_section.rowTitleSqlCheck}
+					</label>
+				</div>
+			</div> 
+			<div class="control-group">
+			<label class="control-label" for="section_template" >#i18n{dbpage.modify_section.rowTitleTemplate}</label>
+				<div class="controls">
+					<input type="file" name="section_template" class="input-large" maxlength="100" >
+				</div>
+			</div>
+			<div class="control-group">
+			<label class="control-label" for="" ></label>
+				<div class="controls">
+				<label class="checkbox" for="section_template_update">
+					<input id="section_template_update" name="section_template_update"  type="checkbox">
+					#i18n{dbpage.modify_section.labelUpdateTemplate}
+				</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="section_desc_column" >#i18n{dbpage.modify_section.rowTitleColumn}  :</label>
+					<div class="controls">
+						<input type="text" id="section_desc_column" name="section_desc_column" class="input-xxlarge" maxlength="255" tabindex="1" value="${section.column}"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="section_desc_sql" >#i18n{dbpage.modify_section.rowTitleSql}  :</label>
+					<div class="controls">
+						<textarea rows="3" class="input-xxlarge" name="section_desc_sql" >${section.sql}</textarea>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="section_pool" >#i18n{dbpage.modify_section.rowTitlePool}  :</label>
+						<div class="controls">
+							<@combo name="section_pool" default_value="${section.pool}" items=pool_list />
+						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="role" >#i18n{dbpage.create_section.rowTitleRole}  :</label>
+						<div class="controls">
+							<@combo name="role" default_value="${section.role}" items=role_list />
+						</div>
+				</div>
+				<div class="form-actions">
+					<button class="btn btn-primary btn-small" type="submit" >
+						<i class="icon-ok icon-white"></i>&nbsp;#i18n{dbpage.modify_section.buttonModify}
+					</button>
+					<a class="btn btn-small" href="jsp/admin/plugins/dbpage/ModifyDbPage.jsp?dbpage_id=${dbpage_id}" title="#i18n{portal.admin.message.buttonCancel}">
+						<i class="icon-remove-circle"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
+					</a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
 </div>

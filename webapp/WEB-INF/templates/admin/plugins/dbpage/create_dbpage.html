@@ -1,25 +1,35 @@
-<div class="content-box" >
-    
-    <h2>#i18n{dbpage.create_dbpage.tableLabel}</h2>
-    
-    <form method="post" form name="create_dbpage" id="create_dbpage" action="jsp/admin/plugins/dbpage/DoCreateDbPage.jsp">    
-        <p>
-            <label for="dbpage_name" >#i18n{dbpage.create_dbpage.rowTitleName} * : </label> 
-            <input type="text" name="dbpage_name" size="60" maxlength="50" tabindex="1" />
-        </p>
-        
-        <p>
-            <label for="dbpage_title" >#i18n{dbpage.create_dbpage.rowTitleTitle} * :</label>  
-            <input type="text" name="dbpage_title" size="60" maxlength="200" tabindex="2" />
-        </p>
-        <p>
-            <label for="dbpage_workgroup" >#i18n{dbpage.create_dbpage.rowTitleWorkgroup} * :</label>  
-			<@combo name="dbpage_workgroup" default_value="" items=workgroup_list />
-        </p>
-        <p>   
-            <input type="submit" value="#i18n{dbpage.create_dbpage.buttonSaveAndAddSections}" class="button" />
-            <input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-        </p> 
-    </form>
-    
+<div class="row-fluid" >
+	<div class="span12" >
+		<form class="form-horizontal" method="post" form name="create_dbpage" id="create_dbpage" action="jsp/admin/plugins/dbpage/DoCreateDbPage.jsp">    
+		<fieldset>
+			<legend>#i18n{dbpage.create_dbpage.tableLabel}</legend>
+			<div class="control-group">
+				<label class="control-label" for="dbpage_name" >#i18n{dbpage.create_dbpage.rowTitleName} * : </label> 
+				<div class="controls">
+					<input type="text" name="dbpage_name" size="60" maxlength="50" tabindex="1" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dbpage_title" >#i18n{dbpage.create_dbpage.rowTitleTitle} * :</label>  
+				<div class="controls">
+					<input type="text" name="dbpage_title" size="60" maxlength="200" tabindex="2" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dbpage_workgroup" >#i18n{dbpage.create_dbpage.rowTitleWorkgroup} * :</label>  
+				<div class="controls">
+						<@combo name="dbpage_workgroup" default_value="" items=workgroup_list />
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-small" type="submit" >
+					<i class="icon-ok icon-white"></i>&nbsp;#i18n{dbpage.create_dbpage.buttonSaveAndAddSections}
+				</button>
+				<a class="btn btn-small" href="jsp/admin/plugins/dbpage/ManageDbPages.jsp" title="#i18n{portal.admin.message.buttonCancel}">
+					<i class="icon-remove-circle"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
+				</a>
+			</div>
+		</fieldset>
+		</form>
+	</div>
 </div>

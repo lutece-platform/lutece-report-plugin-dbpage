@@ -1,106 +1,116 @@
-<div class="content-box" >
-    
-    <h2>#i18n{dbpage.modify_dbpage.titleProperties}</h2>
-    
-    <form method="post" action="jsp/admin/plugins/dbpage/DoModifyDbPage.jsp">
-        
-        <p>
-            <label for="code" >#i18n{dbpage.modify_dbpage.labelName} :</label>
-            ${dbpage.paramName}
-            <input type="hidden" name="dbpage_name" id="dbpage_name" value="${dbpage.paramName}" />
-            <input type="hidden" name="dbpage_id" id="dbpage_id" value="${dbpage.id}" />
-        </p>
-        <p>
-            <label for="code" >#i18n{dbpage.modify_dbpage.labelTitleId}* :</label>
-            ${dbpage.id}
-        </p>
-        <p>
-            <label for="name" >#i18n{dbpage.modify_dbpage.labelTitle}* :</label>
-            <input type="text" name="dbpage_title" id="dbpage_title" tabindex="1" value="${dbpage.title}"/>
-        </p>
-        <p>
-            <label for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>  
-            <#if dbpage.workgroup?has_content >
-            <#assign defaultValue = "${dbpage.workgroup}" >
-            <#else>
-            <#assign defaultValue = "" >
-            </#if>
-            <@combo name="dbpage_workgroup" default_value="${defaultValue}" items=workgroup_list />
-        </p>
-        <input type="submit" value="#i18n{dbpage.modify_dbpage.buttonModify}" class="button" />
-        <input class="button" type="button" onclick="javascript:history.go(-1)" value="#i18n{portal.admin.message.buttonCancel}" />
-    </form>
-    
+<div class="row-fluid" >
+<div class="span3">
+	<form class="form" method="post" action="jsp/admin/plugins/dbpage/DoModifyDbPage.jsp">
+	<input type="hidden" name="dbpage_name" id="dbpage_name" value="${dbpage.paramName}" />
+	<input type="hidden" name="dbpage_id" id="dbpage_id" value="${dbpage.id}" />
+	<fieldset>
+		<legend>#i18n{dbpage.modify_dbpage.titleProperties}</legend>
+		<div class="control-group">
+		<label class="control-label" for="" ></label>
+			<div class="controls">
+				<strong>${dbpage.id} - ${dbpage.paramName}</strong>
+			</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label" for="name" >#i18n{dbpage.modify_dbpage.labelTitle}* :</label>
+			<div class="controls">
+				<input type="text" name="dbpage_title" id="dbpage_title" tabindex="2" value="${dbpage.title}"/>
+			</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label" for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>
+		<#if dbpage.workgroup?has_content >
+			<#assign defaultValue = "${dbpage.workgroup}" >
+		<#else>
+			<#assign defaultValue = "" >
+		</#if>
+			<div class="controls">
+				<@combo name="dbpage_workgroup" default_value="${defaultValue}" items=workgroup_list />
+			</div>
+		</div>
+		<div class="form-actions">
+			<button class="btn btn-primary btn-small" type="submit" >
+				<i class="icon-ok icon-white"></i>&nbsp;#i18n{dbpage.modify_dbpage.buttonModify}
+			</button>
+			<a class="btn btn-small" href="jsp/admin/plugins/dbpage/ManageDbPages.jsp" title="#i18n{portal.admin.message.buttonCancel}">
+				<i class="icon-remove-circle"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
+			</a>
+		</div>
+		</fieldset>
+		</form>
+	</div>
+	<div class="span9">
+		<form class="form-inline" method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/CreateSection.jsp">
+			<input type="hidden" name="dbpage_id" value="${dbpage.id}" />
+			<fieldset>
+			<legend>#i18n{dbpage.modify_dbpage.titleSectionList}
+			<span class="pull-right">
+				<label for="type_id" >#i18n{dbpage.create_section_type.rowTitleType}</label>
+				<@combo name="type_id" default_value="" items=type_list />
+				&nbsp;<button class="btn btn-primary btn-small" type="submit" >
+						<i class="icon-plus icon-white"></i>&nbsp;#i18n{dbpage.create_section_type.buttonCreate}
+				</button>
+			</span>
+			</legend>
+				<table class="table table-striped table-condensed">
+				<tr>
+					<th>#i18n{dbpage.modify_dbpage.columnName}</th>
+					<!--th>#i18n{dbpage.modify_dbpage.columnTemplate}</th>
+					<th>#i18n{dbpage.modify_dbpage.columnType}</th>
+					<th>#i18n{dbpage.modify_dbpage.columnColumn}</th>
+					<th>#i18n{dbpage.modify_dbpage.columnSql}</th>
+					<th>#i18n{dbpage.modify_dbpage.columnRole}</th>
+					<th>#i18n{dbpage.modify_dbpage.columnPool}</th -->
+					<th>#i18n{dbpage.modify_dbpage.columnActions}</th>
+				</tr>
+				<#list dbpage_sections as section>
+				<tr>
+					<td>
+						<strong>#i18n{dbpage.modify_dbpage.columnName}</strong> ${section.title}
+						<br>
+						<#list type_list as i>
+							<#if i.code == section.idType>
+							<strong>#i18n{dbpage.modify_dbpage.columnType}</strong> ${i.name}
+							</#if>
+						</#list>
+						<br>
+						<strong>#i18n{dbpage.modify_dbpage.columnTemplate}</strong> 
+						<#if section.templatePath?exists>
+							<#if section.templatePath ="">
+								#i18n{dbpage.modify_dbpage.labelTemplateDefault}
+							</#if>
+							${section.templatePath}                 
+						<#else>
+							#i18n{dbpage.modify_dbpage.labelTemplateDefault}
+						</#if>
+						<br>
+						<strong>#i18n{dbpage.modify_dbpage.columnColumn}</strong> 
+						${section.column}
+						<br>
+						<strong>#i18n{dbpage.modify_dbpage.columnSql}</strong> 
+						<code title="${section.sql}"><#if section.sql?length &gt; 40>${section.sql?substring(40)}[...]<#else>${section.sql}</#if></code>
+						<br>
+						<#if section.role?has_content><strong>#i18n{dbpage.modify_dbpage.columnRole}</strong> ${section.role}<#else>&nbsp;</#if>
+						<br>
+						<strong>#i18n{dbpage.modify_dbpage.columnPool}</strong>  ${section.pool}
+					</td>
+					<td> 
+						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}" title="${section.title}"><i class="icon-edit icon-white"></i>
+						</a>
+						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" >
+							<i class="icon-arrow-up icon-white"></i>
+						</a>
+						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="null" >
+							<i class="icon-arrow-down icon-white"></i>
+						</a>
+						<a class="btn btn-danger btn-small" href="jsp/admin/plugins/dbpage/DoConfirmDeleteSection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.labelDelete}" >
+							<i class="icon-trash icon-white"></i>
+						</a>
+					</td>
+				</tr>
+				</#list>
+				</table>
+			</fieldset>
+		</form>
+	</div>
 </div>
-
-<div class="content-box" >
-    
-    <h2>#i18n{dbpage.modify_dbpage.titleSectionList}</h2>
-    
-    <table>
-        <tr>
-            <th>#i18n{dbpage.modify_dbpage.columnName}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnTemplate}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnType}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnColumn}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnSql}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnRole}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnPool}</th>
-            <th>#i18n{dbpage.modify_dbpage.columnActions}</th>
-        </tr>
-        
-        <#list dbpage_sections as section>
-        <tr>
-            <td > <a href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}">${section.title}</td>
-            <td > 
-                <#if section.templatePath?exists>
-                <#if section.templatePath ="">
-                #i18n{dbpage.modify_dbpage.labelTemplateDefault}
-                </#if>
-                ${section.templatePath}                 
-                <#else>
-                #i18n{dbpage.modify_dbpage.labelTemplateDefault}
-                </#if>
-            </td>
-            <td > 
-                <#list type_list as i>
-                <#if i.code == section.idType>
-                ${i.name}
-                </#if>
-                </#list>
-            </td>
-            <td > ${section.column}</td>
-            <td >  <textarea class="" rows="2" cols="40" readonly>${section.sql}</textarea></td>
-            <td > 
-                <#if section.role?has_content >
-                ${section.role}
-                <#else>
-                &nbsp;
-                </#if>
-            </td>
-            <td > ${section.pool}</td>
-            <td >
-                <a href="jsp/admin/plugins/dbpage/DoSectionMoveUp.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${dbpage_sections?seq_index_of(section)+1}">
-                    <img src="images/admin/skin/actions/up.png" alt="#i18n{dbpage.modify_dbpage.buttonMoveUp}" title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" />
-                </a>
-                <a href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}">
-                    <img src="images/admin/skin/actions/down.png" alt="#i18n{dbpage.modify_dbpage.buttonMoveDown}" />
-                </a>
-                <a href="jsp/admin/plugins/dbpage/DoConfirmDeleteSection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}" class="admin-menu">
-                <img src="images/admin/skin/actions/delete.png" width="24" height="24" alt="#i18n{dbpage.modify_dbpage.labelDelete}" title="#i18n{dbpage.modify_dbpage.labelDelete}"></a>
-            </td>
-        </tr>				
-        </#list>
-        
-    </table>
-    
-    
-    <div class="highlight-box">
-        <form method="post" action="jsp/admin/plugins/dbpage/CreateSectionType.jsp">
-            <label for="create_section" >#i18n{dbpage.modify_dbpage.labelAddSection}  :</label>
-            <input type="submit" value="#i18n{dbpage.modify_dbpage.buttonAddSection}" class="button"/>
-            <input type="hidden" name="dbpage_id" value="${dbpage.id}">
-        </form>
-    </div>
-</div>
-
