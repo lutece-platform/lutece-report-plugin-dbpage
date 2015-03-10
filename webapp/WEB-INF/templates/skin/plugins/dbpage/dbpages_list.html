@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>dbpage</th>
+                </tr>
+            </thead>
+            <#list dbpages_list as dbpage>
+            <tr>
+                <td>
+                    <a href="jsp/site/Portal.jsp?page=dbpage&dbpage=${dbpage.name}">${dbpage.name}</a> - ${dbpage.title}
+                </td>
+            </tr>
+            </#list>
+        </table>
+    </div>
+</div>

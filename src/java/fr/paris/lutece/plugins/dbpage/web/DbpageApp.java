@@ -47,63 +47,71 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class manages dbpage.
  */
 public class DbpageApp implements XPageApplication
 {
+
     ////////////////////////////////////////////////////////////////////////////
     // Constants
+
     private static final String TEMPLATE_MANAGE_DBPAGE = "skin/plugins/dbpage/dbpage.html";
+    private static final String TEMPLATE_DBPAGE_LIST = "skin/plugins/dbpage/dbpages_list.html";
     private static final String MARK_PAGE_TITLE = "page_title";
     private static final String MARK_SECTIONS = "sections";
+    private static final String MARK_DBPAGES_LIST = "dbpages_list";
     private static final String PARAMETER_DBPAGE_NAME = "dbpage";
     private static final String PROPERTY_PAGE_TITLE = "dbpage.pageTitle";
     private static final String PROPERTY_PAGE_PATH = "dbpage.pagePathLabel";
-    private static final String STR_PAGE_ERROR = AppPropertiesService.getProperty( 
-            "dbpage.page.properties.message.error" );
-    private static final String STR_PARAMETER_ERROR = AppPropertiesService.getProperty( 
-            "dbpage.parameter.properties.message.error" );
+    private static final String STR_PAGE_ERROR = AppPropertiesService.getProperty(
+            "dbpage.page.properties.message.error");
+    private static final String STR_PARAMETER_ERROR = AppPropertiesService.getProperty(
+            "dbpage.parameter.properties.message.error");
 
     /**
-     * Returns the content of the page Contact. It is composed by a form which to capture the data to send a message to
-     * a contact of the portal.
+     * Returns the content of the page Contact. It is composed by a form which
+     * to capture the data to send a message to a contact of the portal.
      *
      * @param request The http request
      * @param nMode The current mode
      * @param plugin The plugin object
      * @return the Content of the page Contact
      */
-    public XPage getPage( HttpServletRequest request, int nMode, Plugin plugin )
+    public XPage getPage(HttpServletRequest request, int nMode, Plugin plugin)
     {
-        XPage page = new XPage(  );
+        XPage page = new XPage();
 
-        page.setTitle( AppPropertiesService.getProperty( PROPERTY_PAGE_TITLE ) );
-        page.setPathLabel( AppPropertiesService.getProperty( PROPERTY_PAGE_PATH ) );
+        page.setTitle(AppPropertiesService.getProperty(PROPERTY_PAGE_TITLE));
+        page.setPathLabel(AppPropertiesService.getProperty(PROPERTY_PAGE_PATH));
 
-        String strDbPageName = request.getParameter( PARAMETER_DBPAGE_NAME );
+        String strDbPageName = request.getParameter(PARAMETER_DBPAGE_NAME);
 
-        if ( ( strDbPageName != null ) && !strDbPageName.equals( "" ) )
+        if ((strDbPageName != null) && !strDbPageName.equals(""))
         {
-            DbPage dbPage = DbPageService.getInstance(  ).getDbPage( strDbPageName );
+            DbPage dbPage = DbPageService.getInstance().getDbPage(strDbPageName);
 
-            if ( dbPage != null )
+            if (dbPage != null)
             {
-                List<String> listValues = DbPageService.getInstance(  ).getValues( request );
-                String strPageContent = buildPage( dbPage, listValues, request );
-                page.setContent( strPageContent );
-                page.setTitle( dbPage.getTitle(  ) );
-                page.setPathLabel( dbPage.getTitle(  ) );
+                List<String> listValues = DbPageService.getInstance().getValues(request);
+                String strPageContent = buildPage(dbPage, listValues, request);
+                page.setContent(strPageContent);
+                page.setTitle(dbPage.getTitle());
+                page.setPathLabel(dbPage.getTitle());
             }
             else
             {
-                page.setContent( STR_PAGE_ERROR );
+                page.setContent(STR_PAGE_ERROR);
             }
         }
         else
         {
-            page.setContent( STR_PARAMETER_ERROR );
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            model.put(MARK_DBPAGES_LIST, DbPageService.getInstance().getDbPagesCollection());
+
+            HtmlTemplate template = AppTemplateService.getTemplate(TEMPLATE_DBPAGE_LIST, request.getLocale(), model);
+
+            page.setContent(template.getHtml());
         }
 
         return page;
@@ -111,19 +119,20 @@ public class DbpageApp implements XPageApplication
 
     /**
      * Returns the Html of the dbpage
+     *
      * @param dbPage The dbPage object
      * @param listValues The listValues substitute in the SQL request
      * @param request The http request
      * @return the html code of the dbPage
      */
-    private String buildPage( DbPage dbPage, List<String> listValues, HttpServletRequest request )
+    private String buildPage(DbPage dbPage, List<String> listValues, HttpServletRequest request)
     {
-        HashMap<String, Object> model = new HashMap<String, Object>(  );
-        model.put( MARK_PAGE_TITLE, dbPage.getTitle(  ) );
-        model.put( MARK_SECTIONS, dbPage.getContent( listValues, request ) );
+        HashMap<String, Object> model = new HashMap<String, Object>();
+        model.put(MARK_PAGE_TITLE, dbPage.getTitle());
+        model.put(MARK_SECTIONS, dbPage.getContent(listValues, request));
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_DBPAGE, request.getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate(TEMPLATE_MANAGE_DBPAGE, request.getLocale(), model);
 
-        return template.getHtml(  );
+        return template.getHtml();
     }
 }
