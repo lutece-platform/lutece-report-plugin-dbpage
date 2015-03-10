@@ -1,55 +1,56 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-	  <artifactId>lutece-plugins-pom</artifactId>
-	  <groupId>fr.paris.lutece.plugins</groupId>
-	  <version>3.7</version>
-	</parent>
+    <parent>
+        <artifactId>lutece-global-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>3.0</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.paris.lutece.plugins</groupId>
-	<artifactId>plugin-dbpage</artifactId>
-	<packaging>lutece-plugin</packaging>
-	<version>2.1.5-SNAPSHOT</version>
-	<name>Lutece dbpage plugin</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>plugin-dbpage</artifactId>
+    <packaging>lutece-plugin</packaging>
+    <version>3.0.0-SNAPSHOT</version>
+    <name>Lutece dbpage plugin</name>
 
-	<repositories>
-		<repository>
-			<id>lutece</id>
-			<name>luteceRepository</name>
-			<url>http://dev.lutece.paris.fr/maven_repository</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-          <id>luteceSnapshot</id>
-          <name>luteceSnapshot</name>
-          <url>http://dev.lutece.paris.fr/snapshot_repository</url>
-          <snapshots>
-              <enabled>true</enabled>
-          </snapshots>
-		  <releases>
-			  <enabled>false</enabled>
-		  </releases>
+    <repositories>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <layout>default</layout>
         </repository>
-	</repositories>
+        <repository>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
 
-	<dependencies>
-		<dependency>
-	    <groupId>fr.paris.lutece</groupId>
-	    <artifactId>lutece-core</artifactId>
-	    <version>[2.4.0,)</version>
-	    <type>lutece-core</type>
-	  </dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[5.0.0,)</version>
+            <type>lutece-core</type>
+        </dependency>
+    </dependencies>
 	
-	<properties>
-		<componentName>dbpage</componentName>
-		<jiraProjectName>DBPAGE</jiraProjectName>
-		<jiraComponentId>10173</jiraComponentId>
-	</properties>
+    <properties>
+        <componentName>dbpage</componentName>
+        <jiraProjectName>DBPAGE</jiraProjectName>
+        <jiraComponentId>10173</jiraComponentId>
+    </properties>
+    
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-dbpage</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-dbpage</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/cms/plugin-dbpage</url>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-report-plugin-dbpage.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-report-plugin-dbpage.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-report-plugin-dbpage.git</url>
     </scm>
 </project>
