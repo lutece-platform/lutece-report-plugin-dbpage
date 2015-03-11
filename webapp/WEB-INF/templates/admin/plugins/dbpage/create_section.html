@@ -1,65 +1,65 @@
-<div class="row-fluid">
-	<div class="span12">
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
 		<form class="form-horizontal" method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/DoCreateSection.jsp">
 		<input type="hidden" name="dbpage_id" value="${dbpage_id}" >
 		<input type="hidden" name="section_id" >
 		<legend>#i18n{dbpage.create_section.tableLabel}</legend>
-		<div class="control-group">
-			<label class="control-label" for="section_title" >#i18n{dbpage.create_section.rowTitleTitle} * :</label>
-				<div class="controls">
+		<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_title" >#i18n{dbpage.create_section.rowTitleTitle} * :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<input type="text" id="section_title" name="section_title" class="input-large" tabindex="1" />
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="template_default" >#i18n{dbpage.create_section.rowTitleTemplateDefault}</label>
-				<div class="controls">
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 col-md-3" for="template_default" >#i18n{dbpage.create_section.rowTitleTemplateDefault}</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<input name="template_default" id="template_default" tabindex="5" class="checkbox" type="checkbox" checked>  
 				</div>
 			</div> 
-			<div class="control-group">
-				<label class="control-label" for="section_sql_check" >#i18n{dbpage.create_section.rowTitleSqlCheck}</label>
-				<div class="controls">
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_sql_check" >#i18n{dbpage.create_section.rowTitleSqlCheck}</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<input name="section_sql_check" id="section_sql_check" tabindex="5" class="checkbox" type="checkbox" checked> 
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="section_template" >#i18n{dbpage.create_section.rowTitleTemplate}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_template" >#i18n{dbpage.create_section.rowTitleTemplate}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<input type="file" name="section_template" size="60" maxlength="100" />
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="type_id" >#i18n{dbpage.create_section.rowTitleType}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="type_id" >#i18n{dbpage.create_section.rowTitleType}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<@combo name="type_id" default_value="" items=type_list />
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="section_desc_column" >#i18n{dbpage.create_section.rowTitleColumn}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_desc_column" >#i18n{dbpage.create_section.rowTitleColumn}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<input type="text" id="section_column" name="section_desc_column" size="60" maxlength="255" tabindex="1" />
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="section_desc_sql" >#i18n{dbpage.create_section.rowTitleSql}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_desc_sql" >#i18n{dbpage.create_section.rowTitleSql}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<textarea rows="3" cols="100" name="section_desc_sql"></textarea>
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="section_pool" >#i18n{dbpage.create_section.rowTitlePool}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="section_pool" >#i18n{dbpage.create_section.rowTitlePool}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<@combo name="section_pool" default_value="" items=pool_list />
 				</div>
 			</div>
-			<div class="control-group">
-			<label class="control-label" for="role" >#i18n{dbpage.create_section.rowTitleRole}  :</label>
-				<div class="controls">
+			<div class="form-group">
+			<label class="control-label col-xs-12 col-sm-3 col-md-3" for="role" >#i18n{dbpage.create_section.rowTitleRole}  :</label>
+				<div class="col-xs-12 col-sm-8 col-md-6">
 					<@combo name="role" default_value="" items=role_list />
 				</div>
 			</div>
-			<div class="form-actions">
-				<button class="btn btn-primary btn-small" type="submit" >#i18n{dbpage.create_section.buttonCreate}</button>
+			<div class="form-group">
+				<button class="btn btn-primary btn-xs" type="submit" >#i18n{dbpage.create_section.buttonCreate}</button>
 			</div>
 			</fieldset>
 		</form>

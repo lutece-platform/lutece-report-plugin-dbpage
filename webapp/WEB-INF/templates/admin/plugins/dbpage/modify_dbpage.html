@@ -1,39 +1,39 @@
-<div class="row-fluid" >
+<div class="row" >
 <div class="span3">
 	<form class="form" method="post" action="jsp/admin/plugins/dbpage/DoModifyDbPage.jsp">
 	<input type="hidden" name="dbpage_name" id="dbpage_name" value="${dbpage.paramName}" />
 	<input type="hidden" name="dbpage_id" id="dbpage_id" value="${dbpage.id}" />
 	<fieldset>
 		<legend>#i18n{dbpage.modify_dbpage.titleProperties}</legend>
-		<div class="control-group">
-		<label class="control-label" for="" ></label>
-			<div class="controls">
+		<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 col-md-3" for="" ></label>
+			<div class="col-xs-12 col-sm-8 col-md-6">
 				<strong>${dbpage.id} - ${dbpage.paramName}</strong>
 			</div>
 		</div>
-		<div class="control-group">
-		<label class="control-label" for="name" >#i18n{dbpage.modify_dbpage.labelTitle}* :</label>
-			<div class="controls">
+		<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 col-md-3" for="name" >#i18n{dbpage.modify_dbpage.labelTitle}* :</label>
+			<div class="col-xs-12 col-sm-8 col-md-6">
 				<input type="text" name="dbpage_title" id="dbpage_title" tabindex="2" value="${dbpage.title}"/>
 			</div>
 		</div>
-		<div class="control-group">
-		<label class="control-label" for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>
+		<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 col-md-3" for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>
 		<#if dbpage.workgroup?has_content >
 			<#assign defaultValue = "${dbpage.workgroup}" >
 		<#else>
 			<#assign defaultValue = "" >
 		</#if>
-			<div class="controls">
+			<div class="col-xs-12 col-sm-8 col-md-6">
 				<@combo name="dbpage_workgroup" default_value="${defaultValue}" items=workgroup_list />
 			</div>
 		</div>
-		<div class="form-actions">
-			<button class="btn btn-primary btn-small" type="submit" >
-				<i class="icon-ok icon-white"></i>&nbsp;#i18n{dbpage.modify_dbpage.buttonModify}
+		<div class="form-group">
+			<button class="btn btn-primary btn-xs" type="submit" >
+				<i class="fa fa-check"></i>&nbsp;#i18n{dbpage.modify_dbpage.buttonModify}
 			</button>
-			<a class="btn btn-small" href="jsp/admin/plugins/dbpage/ManageDbPages.jsp" title="#i18n{portal.admin.message.buttonCancel}">
-				<i class="icon-remove-circle"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
+			<a class="btn btn-xs" href="jsp/admin/plugins/dbpage/ManageDbPages.jsp" title="#i18n{portal.admin.message.buttonCancel}">
+				<i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
 			</a>
 		</div>
 		</fieldset>
@@ -47,7 +47,7 @@
 			<span class="pull-right">
 				<label for="type_id" >#i18n{dbpage.create_section_type.rowTitleType}</label>
 				<@combo name="type_id" default_value="" items=type_list />
-				&nbsp;<button class="btn btn-primary btn-small" type="submit" >
+				&nbsp;<button class="btn btn-primary btn-xs" type="submit" >
 						<i class="icon-plus icon-white"></i>&nbsp;#i18n{dbpage.create_section_type.buttonCreate}
 				</button>
 			</span>
@@ -95,15 +95,15 @@
 						<strong>#i18n{dbpage.modify_dbpage.columnPool}</strong>  ${section.pool}
 					</td>
 					<td> 
-						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}" title="${section.title}"><i class="icon-edit icon-white"></i>
+						<a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}" title="${section.title}"><i class="icon-edit icon-white"></i>
 						</a>
-						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" >
+						<a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" >
 							<i class="icon-arrow-up icon-white"></i>
 						</a>
-						<a class="btn btn-primary btn-small" href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="null" >
+						<a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="null" >
 							<i class="icon-arrow-down icon-white"></i>
 						</a>
-						<a class="btn btn-danger btn-small" href="jsp/admin/plugins/dbpage/DoConfirmDeleteSection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.labelDelete}" >
+						<a class="btn btn-danger btn-xs" href="jsp/admin/plugins/dbpage/DoConfirmDeleteSection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.labelDelete}" >
 							<i class="icon-trash icon-white"></i>
 						</a>
 					</td>
