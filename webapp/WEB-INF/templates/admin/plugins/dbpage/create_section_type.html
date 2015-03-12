@@ -7,7 +7,7 @@
 				<div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 col-md-3" for="type_id" >#i18n{dbpage.create_section_type.rowTitleType}  :</label>
 					<div class="col-xs-12 col-sm-8 col-md-6">
-						<@combo name="type_id" default_value="" items=section_type_id_list />
+						<@comboWithParams additionalParameters="class='form-control'" name="type_id" default_value="" items=section_type_id_list />
 						&nbsp;<button class="btn btn-primary btn-xs" type="submit" >
 								<i class="icon-plus icon-white"></i>&nbsp;#i18n{dbpage.create_section_type.buttonCreate}
 							</button>
