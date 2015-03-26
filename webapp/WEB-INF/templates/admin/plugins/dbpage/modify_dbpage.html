@@ -1,50 +1,28 @@
 <div class="row" >
-    <div class="col-md-3">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">#i18n{dbpage.modify_dbpage.titleProperties}</h3>
-            </div>
-            <div class="box-body">
-                <form class="form-horizontal" method="post" action="jsp/admin/plugins/dbpage/DoModifyDbPage.jsp">
-                    <input type="hidden" name="dbpage_name" id="dbpage_name" value="${dbpage.paramName}" />
-                    <input type="hidden" name="dbpage_id" id="dbpage_id" value="${dbpage.id}" />
-                    <strong>${dbpage.id} - ${dbpage.paramName}</strong>
-                    <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-12 col-md-12" for="dbpage_title" >#i18n{dbpage.modify_dbpage.labelTitle}* :</label>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <input class=form-control" type="text" name="dbpage_title" id="dbpage_title" tabindex="2" value="${dbpage.title}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-12 col-sm-12 col-md-12" for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>
-                        <#if dbpage.workgroup?has_content >
-                        <#assign defaultValue = "${dbpage.workgroup}" >
-                        <#else>
-                        <#assign defaultValue = "" >
-                        </#if>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <@comboWithParams name="dbpage_workgroup" default_value="${defaultValue}" items=workgroup_list  additionalParameters="class='form-control'" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12 col-sm-offset-3 col-sm-8 col-md-offset-3 col-md-8">
-                            <button class="btn btn-primary btn-sm" type="submit" >
-                                <i class="fa fa-check"></i>&nbsp;#i18n{dbpage.modify_dbpage.buttonModify}
-                            </button>
-                            <a class="btn btn-sm" href="jsp/admin/plugins/dbpage/ManageDbPages.jsp" title="#i18n{portal.admin.message.buttonCancel}">
-                                <i class="fa fa-close"></i>&nbsp;#i18n{portal.admin.message.buttonCancel}
-                            </a>
-                        </div>
-                    </div>
-                </form>
+    <@boxSized col=3 i18nTitleKey="dbpage.modify_dbpage.titleProperties" >
+    <form class="form-horizontal" method="post" action="jsp/admin/plugins/dbpage/DoModifyDbPage.jsp">
+        <input type="hidden" name="dbpage_name" id="dbpage_name" value="${dbpage.paramName}" />
+        <input type="hidden" name="dbpage_id" id="dbpage_id" value="${dbpage.id}" />
+        <strong>${dbpage.id} - ${dbpage.paramName}</strong>
+        <@fieldInputText i18nLabelKey="dbpage.create_dbpage.rowTitleTitle" inputName="dbpage_title"  value="${dbpage.title}" mandatory=true maxlength=250 />
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-12 col-md-12" for="dbpage_workgroup" >#i18n{dbpage.modify_dbpage.labelWorkgroup} * :</label>
+            <#if dbpage.workgroup?has_content >
+            <#assign defaultValue = "${dbpage.workgroup}" >
+            <#else>
+            <#assign defaultValue = "" >
+            </#if>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <@comboWithParams name="dbpage_workgroup" default_value="${defaultValue}" items=workgroup_list  additionalParameters="class='form-control'" />
             </div>
         </div>
-    </div>
+        <@actionButtons url2='jsp/admin/plugins/dbpage/ManageDbPages.jsp' />
+    </form>
+    </@boxSized>
     <div class="col-sm-9">
         <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">#i18n{dbpage.modify_dbpage.titleSectionList}</h3>
-                <div class="box-tools">
+            <@boxHeader i18nTitleKey="dbpage.modify_dbpage.titleProperties" >
+                <@headerButtons>
                     <form class="form-inline pull-right spaced" method="post" enctype="multipart/form-data" action="jsp/admin/plugins/dbpage/CreateSection.jsp">
                         <input type="hidden" name="dbpage_id" value="${dbpage.id}" />
                         <label for="type_id" >#i18n{dbpage.create_section_type.rowTitleType}</label>
@@ -53,10 +31,10 @@
                             <i class="icon-plus icon-white"></i>&nbsp;#i18n{dbpage.create_section_type.buttonCreate}
                         </button>
                     </form>
-                </div>
-            </div>
+                </@headerButtons>
+            </@boxHeader>
             <div class="box-body">
-                <table class="table table-hover table-condensed">
+                <@table>
                     <tr>
                         <th>#i18n{dbpage.modify_dbpage.columnType}</th>
                         <th>#i18n{dbpage.modify_dbpage.columnName}</th>
@@ -69,6 +47,7 @@
                         <th>#i18n{dbpage.modify_dbpage.columnPool}</th -->
                         <th>#i18n{dbpage.modify_dbpage.columnActions}</th>
                     </tr>
+                    <@tableHeadBodySeparator />
                     <#list dbpage_sections as section>
                     <tr>
                         <td>
@@ -116,7 +95,7 @@
                         </td>
                     </tr>
                     </#list>
-                </table>
+                </@table>
             </div>
         </div>
     </div>
