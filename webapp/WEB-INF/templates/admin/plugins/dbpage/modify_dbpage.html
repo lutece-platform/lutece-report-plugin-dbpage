@@ -83,10 +83,10 @@
                         <td> 
                             <a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}" title="${section.title}"><i class="icon-edit icon-white"></i>
                             </a>
-                            <a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/ModifySection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" >
+                            <a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/DoSectionMoveUp.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="#i18n{dbpage.modify_dbpage.buttonMoveUp}" >
                                 <i class="icon-arrow-up icon-white"></i>
                             </a>
-                            <a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="null" >
+                            <a class="btn btn-primary btn-xs" href="jsp/admin/plugins/dbpage/DoSectionMoveDown.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}&section_order=${section.order}"  title="#i18n{dbpage.modify_dbpage.buttonMoveDown}" >
                                 <i class="icon-arrow-down icon-white"></i>
                             </a>
                             <a class="btn btn-danger btn-xs" href="jsp/admin/plugins/dbpage/DoConfirmDeleteSection.jsp?section_id=${section.id}&dbpage_id=${dbpage.id}"  title="#i18n{dbpage.modify_dbpage.labelDelete}" >
