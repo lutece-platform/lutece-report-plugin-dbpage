@@ -518,7 +518,8 @@ public class DbPageJspBean extends PluginAdminPageJspBean
             {
                 if ( ( strCheckSql != null ) && strCheckSql.equals( "on" ) )
                 {
-                    DbPageHome.selectRows( strSql, DbPageConnectionService.getConnectionService( strPoolName ) );
+                    String strSqlToCheck = strSql.replaceAll( "@value(.*)@", "1" );
+                    DbPageHome.selectRows( strSqlToCheck , DbPageConnectionService.getConnectionService( strPoolName ) );
                 }
             }
             catch ( SQLException e )
