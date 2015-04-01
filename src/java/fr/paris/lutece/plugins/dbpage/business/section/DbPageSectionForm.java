@@ -116,27 +116,24 @@ public class DbPageSectionForm extends DbPageSection
 
         if ( ( strQuery != null ) && !strQuery.equals( "" ) )
         {
-            Collection cRow;
+            
 
             try
             {
-                cRow = DbPageHome.selectRows( strQuery, getConnectionService( getDbPool(  ) ) );
+                List<List<String>> listRows = DbPageHome.selectRows( strQuery, getConnectionService( getDbPool(  ) ) );
 
-                if ( ( cRow != null ) && !cRow.isEmpty(  ) )
+                if ( ( listRows != null ) && !listRows.isEmpty(  ) )
                 {
-                    Iterator iRow = cRow.iterator(  ); //TODO Iterator remove
-                    Iterator icollecColumnName = getColumnNames(  ).iterator(  );
-
-                    while ( iRow.hasNext(  ) )
+                    // Form values should be in the first row of the resultset 
+                    List<String> formRow = listRows.get( 0 );
+                    
+                    int nIndex = 0;
+                    for( String strColumnName : getColumnNames(  ) )
                     {
-                        Collection cLine = (Collection) iRow.next(  );
-                        Iterator iLine = cLine.iterator(  ); //TODO Iterator remove
-
-                        while ( iLine.hasNext(  ) )
+                        if( nIndex < formRow.size() )
                         {
-                            String strBookmarkName = (String) icollecColumnName.next(  );
-                            String strElement = (String) iLine.next(  );
-                            String strBookmark = "@" + strBookmarkName + "@";
+                            String strElement = (String) formRow.get( nIndex++ );
+                            String strBookmark = "@" + strColumnName + "@";
                             template.substitute( strBookmark, strElement );
                         }
                     }
