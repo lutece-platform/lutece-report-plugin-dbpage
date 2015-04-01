@@ -396,7 +396,7 @@ public class DbPageJspBean extends PluginAdminPageJspBean
         {
             if ( ( strCheckSql != null ) && strCheckSql.equals( "on" ) )
             {
-                DbPageHome.selectRows( strSql, DbPageConnectionService.getConnectionService( strPoolName ) );
+                DbPageHome.selectRows( getSqlToCheck( strSql ), DbPageConnectionService.getConnectionService( strPoolName ) );
             }
         }
         catch ( SQLException e )
@@ -518,8 +518,7 @@ public class DbPageJspBean extends PluginAdminPageJspBean
             {
                 if ( ( strCheckSql != null ) && strCheckSql.equals( "on" ) )
                 {
-                    String strSqlToCheck = strSql.replaceAll( "@value(.*)@", "1" );
-                    DbPageHome.selectRows( strSqlToCheck , DbPageConnectionService.getConnectionService( strPoolName ) );
+                    DbPageHome.selectRows( getSqlToCheck( strSql ) , DbPageConnectionService.getConnectionService( strPoolName ) );
                 }
             }
             catch ( SQLException e )
@@ -978,5 +977,11 @@ public class DbPageJspBean extends PluginAdminPageJspBean
                 }
             }
         }
+    }
+
+    private String getSqlToCheck(String strSql)
+    {
+        // remove bookmarks from the SQL request
+        return strSql.replaceAll( "@value(.*)@", "1" );
     }
 }
